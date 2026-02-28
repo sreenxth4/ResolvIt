@@ -1,0 +1,16 @@
+project_id = "smmcvtlsqhwxqvqzullr"
+
+[functions.submit-issue]
+verify_jwt = false
+
+[functions.recalculate-priorities]
+verify_jwt = false
+
+[functions.check-escalations]
+verify_jwt = false
+
+[functions.seed-admin]
+verify_jwt = false
+
+[functions.create-authority]
+verify_jwt = false

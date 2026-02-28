@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 97%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 250 70% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 170 60% 42%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 15% 93%;
+    --muted-foreground: 240 10% 45%;
+
+    --accent: 280 50% 92%;
+    --accent-foreground: 280 50% 25%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 88%;
+    --input: 240 10% 88%;
+    --ring: 250 70% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 250 30% 14%;
+    --sidebar-foreground: 240 15% 90%;
+    --sidebar-primary: 250 70% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 250 25% 22%;
+    --sidebar-accent-foreground: 240 15% 90%;
+    --sidebar-border: 250 20% 22%;
+    --sidebar-ring: 250 70% 65%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 10%;
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --critical: 0 72% 51%;
+    --critical-foreground: 0 0% 100%;
+    --info: 210 70% 55%;
+    --info-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 250 20% 7%;
+    --foreground: 240 15% 95%;
+
+    --card: 250 20% 12%;
+    --card-foreground: 240 15% 95%;
+
+    --popover: 250 20% 12%;
+    --popover-foreground: 240 15% 95%;
+
+    --primary: 250 70% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 170 55% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 250 15% 18%;
+    --muted-foreground: 240 10% 60%;
+
+    --accent: 280 30% 20%;
+    --accent-foreground: 280 50% 80%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 15% 20%;
+    --input: 250 15% 20%;
+    --ring: 250 70% 60%;
+
+    --sidebar-background: 250 25% 6%;
+    --sidebar-foreground: 240 15% 90%;
+    --sidebar-primary: 250 70% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 250 20% 14%;
+    --sidebar-accent-foreground: 240 15% 90%;
+    --sidebar-border: 250 20% 14%;
+    --sidebar-ring: 250 70% 60%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 10%;
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --critical: 0 72% 51%;
+    --critical-foreground: 0 0% 100%;
+    --info: 210 70% 55%;
+    --info-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  z-index: 1;
+  border-radius: var(--radius);
+}
+
+/* Global gradient utilities */
+@layer utilities {
+  .gradient-text-primary {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+}
+
+/* ─── Stagger animation delays ─── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* ─── Glass morphism ─── */
+.glass {
+  background: hsl(var(--card) / 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid hsl(var(--border) / 0.3);
+}
+
+.glass-strong {
+  background: hsl(var(--card) / 0.8);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid hsl(var(--border) / 0.4);
+}
+
+/* ─── Animated gradient border ─── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary)));
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Shimmer / skeleton loading ─── */
+.shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted) / 0.5) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Page transitions ─── */
+.page-enter {
+  animation: fade-in 0.4s ease-out both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Glow-on-hover for cards ─── */
+.card-glow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-glow:hover {
+  box-shadow:
+    0 8px 30px -4px hsl(var(--primary) / 0.12),
+    0 4px 12px -2px hsl(var(--primary) / 0.06);
+}
+
+/* ─── Smooth number counter ─── */
+.stat-value {
+  display: inline-block;
+  animation: count-up 0.4s ease-out both;
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Subtle scroll shadows on tables ─── */
+.table-container {
+  position: relative;
+  overflow-x: auto;
+}
+
+/* ─── Enhanced focus rings ─── */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsl(var(--primary) / 0.3);
+  transition: box-shadow 0.2s ease;
+}
+
+/* ─── Smooth scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ─── Smooth page scroll ─── */
+html {
+  scroll-behavior: smooth;
+}

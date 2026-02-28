@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Reporters can delete own issues" ON public.issues;
