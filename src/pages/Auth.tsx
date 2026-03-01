@@ -175,6 +175,7 @@ const AdminLoginForm = ({ isSubmitting, setIsSubmitting }: { isSubmitting: boole
           placeholder={t("admin.passwordPlaceholder")}
           value={password}
           onChange={e => setPassword(e.target.value)}
+          autoComplete="new-password"
           required
           className="h-11 transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 focus:scale-[1.01]"
         />
@@ -220,7 +221,7 @@ const LoginForm = ({ isSubmitting, setIsSubmitting }: { isSubmitting: boolean; s
         </div>
         <div className="space-y-2">
           <Label htmlFor="login-password" className="text-sm font-semibold">{t("login.password")}</Label>
-          <Input id="login-password" type="password" value={password} onChange={e => setPassword(e.target.value)} required className="h-11 transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 focus:scale-[1.01]" />
+          <Input id="login-password" type="password" value={password} onChange={e => setPassword(e.target.value)} autoComplete="new-password" required className="h-11 transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 focus:scale-[1.01]" />
         </div>
         <Button type="submit" className="w-full h-11 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white shadow-lg hover:shadow-xl hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300" disabled={isSubmitting}>
           {isSubmitting ? t("auth.signingIn") : t("login.submit")}
@@ -269,7 +270,7 @@ const SignupForm = ({ isSubmitting, setIsSubmitting }: { isSubmitting: boolean; 
       </div>
       <div className="space-y-2">
         <Label htmlFor="signup-password" className="text-sm font-semibold">{t("signup.password")}</Label>
-        <Input id="signup-password" type="password" value={password} onChange={e => setPassword(e.target.value)} required className="h-11 transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 focus:scale-[1.01]" />
+        <Input id="signup-password" type="password" value={password} onChange={e => setPassword(e.target.value)} autoComplete="new-password" required className="h-11 transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 focus:scale-[1.01]" />
       </div>
       <Button type="submit" className="w-full h-11 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white shadow-lg hover:shadow-xl hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300" disabled={isSubmitting}>
         {isSubmitting ? t("auth.creatingAccount") : t("signup.submit")}
@@ -324,6 +325,7 @@ const AuthorityLoginForm = ({ isSubmitting, setIsSubmitting }: { isSubmitting: b
           placeholder={t("authority.passwordPlaceholder")}
           value={password}
           onChange={e => setPassword(e.target.value)}
+          autoComplete="new-password"
           required
           className="h-11 transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 focus:scale-[1.01]"
         />
