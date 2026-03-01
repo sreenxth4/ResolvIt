@@ -3,8 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import AuthorityPage from "./pages/AuthorityPage";
+// import HomePage from "./pages/HomePage";
+// import AuthorityPage from "./pages/AuthorityPage";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -41,8 +41,8 @@ const App = () => (
         <AuthProvider>
           <Routes>
             {/* Demo Home and Authority Pages for Vercel static hosting */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/authority" element={<AuthorityPage />} />
+              {/* Default route redirects to /auth */}
+              <Route path="/" element={<Navigate to="/auth" replace />} />
 
             {/* Existing routes */}
             <Route path="/auth" element={<Auth />} />
