@@ -35,22 +35,6 @@ const SubmitIssue = () => {
   const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  // const [analyzing, setAnalyzing] = useState(false);
-
-  // const fileToBase64 = (file: File): Promise<string> => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       const result = reader.result as string;
-  //       // Remove the data:image/...;base64, prefix
-  //       resolve(result.split(",")[1]);
-  //     };
-  //     reader.onerror = reject;
-  //     reader.readAsDataURL(file);
-  //   });
-  // };
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,38 +160,11 @@ const SubmitIssue = () => {
               </div>
 
               <div className="space-y-2 animate-fade-in stagger-2">
-                <Label htmlFor="image" className="text-sm font-semibold tracking-wide flex items-center gap-2">
-                  <Camera className="h-4 w-4 text-primary" />
-                  {t("submit.photo")} <span className="text-destructive">*</span>
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="image"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    className="h-11 file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-all duration-300"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file && file.size > 5 * 1024 * 1024) {
-                        toast({ title: t("submit.fileTooLarge"), description: t("submit.maxSize"), variant: "destructive" });
-                        return;
-                      }
-                      setImageFile(file || null);
-                    }}
-                  />
-                  {imageFile && (
-                    <p className="text-xs text-muted-foreground mt-1 animate-fade-in">{imageFile.name}</p>
-                  )}
-                </div>
-                {/* AI auto-describe button removed */}
-              </div>
-
-              <div className="space-y-2 animate-fade-in stagger-3">
                 <Label htmlFor="description" className="text-sm font-semibold tracking-wide">{t("submit.description")}</Label>
                 <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder={t("submit.descPlaceholder")} required maxLength={2000} rows={4} className="transition-all duration-300 focus:shadow-lg focus:shadow-primary/10 resize-none" />
               </div>
 
-              <div className="grid grid-cols-2 gap-4 animate-fade-in stagger-4">
+              <div className="grid grid-cols-2 gap-4 animate-fade-in stagger-3">
                 <div className="space-y-2">
                   <Label className="text-sm font-semibold tracking-wide">{t("submit.category")}</Label>
                   <Select value={category} onValueChange={setCategory}>
@@ -232,13 +189,39 @@ const SubmitIssue = () => {
                 </div>
               </div>
 
-              <div className="space-y-2 animate-fade-in stagger-5">
+              <div className="space-y-2 animate-fade-in stagger-4">
                 <Label className="text-sm font-semibold tracking-wide flex items-center gap-2">
                   <MapPinned className="h-4 w-4 text-primary" />
                   {t("submit.location")}
                 </Label>
                 <div className="rounded-xl overflow-hidden border-2 border-border/50 hover:border-primary/30 transition-colors duration-300">
                   <LocationPicker value={location} onChange={setLocation} height="300px" />
+                </div>
+              </div>
+
+              <div className="space-y-2 animate-fade-in stagger-5">
+                <Label htmlFor="image" className="text-sm font-semibold tracking-wide flex items-center gap-2">
+                  <Camera className="h-4 w-4 text-primary" />
+                  {t("submit.photo")} <span className="text-destructive">*</span>
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="image"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    className="h-11 file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-all duration-300"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file && file.size > 5 * 1024 * 1024) {
+                        toast({ title: t("submit.fileTooLarge"), description: t("submit.maxSize"), variant: "destructive" });
+                        return;
+                      }
+                      setImageFile(file || null);
+                    }}
+                  />
+                  {imageFile && (
+                    <p className="text-xs text-muted-foreground mt-1 animate-fade-in">{imageFile.name}</p>
+                  )}
                 </div>
               </div>
 

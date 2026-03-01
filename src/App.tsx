@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AuthorityPage from "./pages/AuthorityPage";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -38,7 +40,11 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<Navigate to="/auth" replace />} />
+            {/* Demo Home and Authority Pages for Vercel static hosting */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/authority" element={<AuthorityPage />} />
+
+            {/* Existing routes */}
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
 
@@ -50,7 +56,7 @@ const App = () => (
             <Route path="/citizen/leaderboard" element={<ProtectedRoute allowedRoles={["citizen"]}><Leaderboard /></ProtectedRoute>} />
 
             {/* Authority Routes */}
-            <Route path="/authority" element={<ProtectedRoute allowedRoles={["authority", "admin"]}><AuthorityDashboard /></ProtectedRoute>} />
+            <Route path="/authority/dashboard" element={<ProtectedRoute allowedRoles={["authority", "admin"]}><AuthorityDashboard /></ProtectedRoute>} />
             <Route path="/authority/queue" element={<ProtectedRoute allowedRoles={["authority", "admin"]}><AuthorityQueue /></ProtectedRoute>} />
             <Route path="/authority/stats" element={<ProtectedRoute allowedRoles={["authority", "admin"]}><AuthorityStats /></ProtectedRoute>} />
             <Route path="/authority/issues/:id" element={<ProtectedRoute allowedRoles={["authority"]}><IssueDetail /></ProtectedRoute>} />
